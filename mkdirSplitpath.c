@@ -26,4 +26,30 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     // YOUR CODE HERE
     //
     return NULL;
+
+
+	int delimiterNum;
+    for(int i=0; i<strlen(pathName); i++) {
+    if(pathName[i]="/") {
+	delimiterNum+=1;
+    
+    }
+
+    
+    
+    }
+
+
+
+
+    for(int j; j<delimiterNum; j++){
+	*baseName=strtok(pathName, "/");
+    }
+
+	
+	*dirName=strtok(pathName, *baseName);
+
+	return *baseName, *dirName;
+
+
 }
