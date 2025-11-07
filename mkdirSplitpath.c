@@ -22,8 +22,9 @@ void mkdir(char pathName[]){
 //Need a for loop to loop through the children. Check the children if it already exists.
 
 	
-		struct NODE* child=ParentNode->childPtr;
+		struct NODE* child;
 		child=(struct NODE*)(malloc(sizeof(struct NODE*)));
+		child=ParentNode->childPtr;
 		while(child!=NULL){
 			int res=strcmp(child->name,baseName);
                         if(res==0){
@@ -53,8 +54,9 @@ void mkdir(char pathName[]){
 	if(ParentNode->childPtr==NULL){
 	ParentNode->childPtr=NewDir;}
 	else{
-	struct NODE* checkChild=ParentNode->childPtr;
+	struct NODE* checkChild;
 	checkChild=(struct NODE*)(malloc(sizeof(struct NODE*)));
+	checkChild=ParentNode->childPtr;
                 while(checkChild!=NULL){
 		checkChild = checkChild->siblingPtr;
 		}
@@ -87,6 +89,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     //
     //
         struct NODE* directory;
+	directory=(struct NODE*)(malloc(sizeof(struct NODE*)));
         if (pathName[0]=='/'){
         directory=root;
 }
@@ -97,7 +100,10 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         //currentDirName = firstToken; // refer to the tokenization example at /u/pa/nb/tolgacan/210/spring25/strtokex.c
         char* token=strtok(dirName, "/");
         while (token!=NULL) { // while there are still tokens
-                struct NODE* child = directory->childPtr;
+                struct NODE* child;
+		child=(struct NODE*)(malloc(sizeof(struct NODE*)));
+		child = directory->childPtr;
+
                  while (child!=NULL) {
                         if (strcmp(child->name,token)!=0) {
                                 child = child->siblingPtr;
@@ -128,7 +134,9 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
 
 
         //*dirName=strtok(pathName, *baseName);
-        struct NODE* outputPtr=directory->parentPtr;
+        struct NODE* outputPtr;
+	outputPtr=(struct NODE*)(malloc(sizeof(struct NODE*)));
+	outputPtr=directory->parentPtr;
         return outputPtr;
 }
 
