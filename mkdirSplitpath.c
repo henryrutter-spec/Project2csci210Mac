@@ -23,6 +23,7 @@ void mkdir(char pathName[]){
 
 	
 		struct NODE* child=ParentNode->childPtr;
+		child=(struct NODE*)(malloc(sizeof(struct NODE*)));
 		while(child!=NULL){
 			int res=strcmp(child->name,baseName);
                         if(res==0){
@@ -53,6 +54,7 @@ void mkdir(char pathName[]){
 	ParentNode->childPtr=NewDir;}
 	else{
 	struct NODE* checkChild=ParentNode->childPtr;
+	checkChild=(struct NODE*)(malloc(sizeof(struct NODE*)));
                 while(checkChild!=NULL){
 		checkChild = checkChild->siblingPtr;
 		}
