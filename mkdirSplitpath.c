@@ -40,6 +40,7 @@ void mkdir(char pathName[]){
         //splitpathoutput.siblingPtr=NULL;
 	
 	NewDir=(struct NODE*)(malloc(sizeof(struct NODE*)));
+	ParentNode=(struct NODE*)(malloc(sizeof(struct NODE*)));
 	strcpy(NewDir->name, baseName);
 	NewDir->fileType='D';
 	
