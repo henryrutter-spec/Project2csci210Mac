@@ -14,6 +14,13 @@ void mkdir(char pathName[]){
         char baseName[30];
         char dirName[30];
 	struct NODE* ParentNode;
+
+	ParentNode->parentPtr=NULL;
+        ParentNode->childPtr=NULL;
+        ParentNode->siblingPtr=NULL;
+
+
+
 	struct NODE* NewDir;
         
         ParentNode=splitPath(pathName,baseName,dirName);
@@ -24,6 +31,12 @@ void mkdir(char pathName[]){
 	
 		struct NODE* child;
 		child=(struct NODE*)(malloc(sizeof(struct NODE*)));
+
+		child->parentPtr=NULL;
+        	child->childPtr=NULL;
+        	child->siblingPtr=NULL;
+
+
 		child=ParentNode->childPtr;
 		while(child!=NULL){
 			int res=strcmp(child->name,baseName);
@@ -56,6 +69,12 @@ void mkdir(char pathName[]){
 	else{
 	struct NODE* checkChild;
 	checkChild=(struct NODE*)(malloc(sizeof(struct NODE*)));
+
+	checkChild->parentPtr=NULL;
+        checkChild->childPtr=NULL;
+       	checkChild->siblingPtr=NULL;
+
+
 	checkChild=ParentNode->childPtr;
                 while(checkChild!=NULL){
 		checkChild = checkChild->siblingPtr;
@@ -90,6 +109,11 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     //
         struct NODE* directory;
 	directory=(struct NODE*)(malloc(sizeof(struct NODE*)));
+	directory->parentPtr=NULL;
+       	directory->childPtr=NULL;
+        directory->siblingPtr=NULL;
+
+
         if (pathName[0]=='/'){
         directory=root;
 }
@@ -102,6 +126,9 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         while (token!=NULL) { // while there are still tokens
                 struct NODE* child;
 		child=(struct NODE*)(malloc(sizeof(struct NODE*)));
+		child->parentPtr=NULL;
+                child->childPtr=NULL;
+                child->siblingPtr=NULL;
 		child = directory->childPtr;
 
                  while (child!=NULL) {
@@ -136,6 +163,9 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         //*dirName=strtok(pathName, *baseName);
         struct NODE* outputPtr;
 	outputPtr=(struct NODE*)(malloc(sizeof(struct NODE*)));
+	outputPtr->parentPtr=NULL;
+        outputPtr->childPtr=NULL;
+        outputPtr->siblingPtr=NULL;
 	outputPtr=directory->parentPtr;
         return outputPtr;
 }
