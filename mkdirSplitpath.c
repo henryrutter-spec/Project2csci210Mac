@@ -107,6 +107,19 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     //
     //
     //
+        int delimiterNum;
+    for(int i=0; i<strlen(pathName); i++) {
+    if(pathName[i]=='/') {
+        delimiterNum=i;
+    }
+    }
+    //for(int j; j<delimiterNum; j++){
+        //*baseName=strtok(pathName, "/");
+    //}
+        strncpy(dirName, pathName, delimiterNum);
+        strcpy(baseName, pathName+delimiterNum+1);
+
+
         struct NODE* directory;
 	directory=(struct NODE*)(malloc(sizeof(struct NODE*)));
 	directory->parentPtr=NULL;
@@ -146,18 +159,6 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
                 token=strtok(NULL,"/");
                 //currentDir = get next token; // now in the next iteration look for the next directory name
         }
-        int delimiterNum;
-    for(int i=0; i<strlen(pathName); i++) {
-    if(pathName[i]=='/') {
-        delimiterNum=i;
-    }
-    }
-    //for(int j; j<delimiterNum; j++){
-        //*baseName=strtok(pathName, "/");
-    //}
-        strncpy(dirName, pathName, delimiterNum);
-        strcpy(baseName, pathName+delimiterNum+1);
-
 
 
         //*dirName=strtok(pathName, *baseName);
@@ -166,7 +167,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
 	outputPtr->parentPtr=NULL;
         outputPtr->childPtr=NULL;
         outputPtr->siblingPtr=NULL;
-	outputPtr=directory->parentPtr;
+	outputPtr=directory;
         return outputPtr;
 }
 
