@@ -168,7 +168,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         outputPtr->childPtr=NULL;
         outputPtr->siblingPtr=NULL;
 	outputPtr=directory;
-        return outputPtr;
+        return directory;
 }
 
 
