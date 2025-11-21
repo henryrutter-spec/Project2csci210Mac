@@ -15,8 +15,8 @@ void mkdir(char pathName[]){
         }
         char baseName[30];
         char dirName[30];
-	struct NODE* ParentNode=splitPath(pathName,baseName,dirName);
-	
+	struct NODE* ParentNode;
+	ParentNode=splitPath(pathName,baseName,dirName);
 	//ParentNode=(struct NODE*)(malloc(sizeof(struct NODE*)));
 	//ParentNode->parentPtr=NULL;
         //ParentNode->childPtr=NULL;
