@@ -31,32 +31,6 @@ void mkdir(char pathName[]){
 
 //Need a for loop to loop through the children. Check the children if it already exists.
 
-	
-		struct NODE* child;
-		child=(struct NODE*)(malloc(sizeof(struct NODE*)));
-
-		//child->parentPtr=NULL;
-        	//child->childPtr=NULL;
-        	//child->siblingPtr=NULL;
-
-
-		child=ParentNode->childPtr;
-		while(child!=NULL){
-			int res=strcmp(child->name,baseName);
-                        if(res==0){
-                printf("MKDIR ERROR: directory %s already exists\n", dirName);
-                return;
-        }
-	child = child->siblingPtr;
-	}
-
-
-
-
-    printf("TO BE IMPLEMENTED\n");
-        //splitpathoutput.childPtr=NULL;
-        //splitpathoutput.siblingPtr=NULL;
-	
 	NewDir=(struct NODE*)(malloc(sizeof(struct NODE*)));
 	//ParentNode=(struct NODE*)(malloc(sizeof(struct NODE*)));
 	strcpy(NewDir->name, baseName);
@@ -70,21 +44,46 @@ void mkdir(char pathName[]){
 	if(ParentNode->childPtr==NULL){
 	ParentNode->childPtr=NewDir;}
 	else{
-	struct NODE* checkChild;
-	checkChild=(struct NODE*)(malloc(sizeof(struct NODE*)));
+	
+		struct NODE* child;
+
+		//child->parentPtr=NULL;
+        	//child->childPtr=NULL;
+        	//child->siblingPtr=NULL;
+
+
+		child=ParentNode->childPtr;
+		while(child->siblingPtr!=NULL){
+			int res=strcmp(child->name,baseName);
+                        if(res==0){
+                		printf("MKDIR ERROR: directory %s already exists\n", dirName);
+                		return;
+        		}
+			child = child->siblingPtr;
+		}
+		child->siblingPtr = NewDir;
+	}
+
+
+
+    //printf("TO BE IMPLEMENTED\n");
+        //splitpathoutput.childPtr=NULL;
+        //splitpathoutput.siblingPtr=NULL;
+	
+	//checkChild=(struct NODE*)(malloc(sizeof(struct NODE*)));
 
 	//checkChild->parentPtr=NULL;
         //checkChild->childPtr=NULL;
        	//checkChild->siblingPtr=NULL;
 
 
-	checkChild=ParentNode->childPtr;
-                while(checkChild!=NULL){
-		checkChild = checkChild->siblingPtr;
-		}
-		checkChild->siblingPtr=NewDir;
+	//checkChild=ParentNode->childPtr;
+                //while(checkChild!=NULL){
+		//checkChild = checkChild->siblingPtr;
+		//}
+		//checkChild->siblingPtr=NewDir;
 	
-	}
+	//}
 	
 
 
