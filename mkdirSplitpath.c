@@ -7,7 +7,7 @@ void mkdir(char pathName[]){
     // TO BE IMPLEMENTED
     //
     // YOUR CODE TO REPLACE THE PRINTF FUNCTION BELOW
-        
+        //printf(cwd->name);
 	//strlen(pathName)==1
 	if (!strcmp(pathName, "/")){
         printf("MKDIR ERROR: no path provided\n");
@@ -15,8 +15,8 @@ void mkdir(char pathName[]){
         }
         char baseName[30];
         char dirName[30];
-	struct NODE* ParentNode;
-	ParentNode=splitPath(pathName,baseName,dirName);
+	struct NODE* ParentNode=splitPath(pathName,baseName,dirName);
+	//ParentNode=splitPath(pathName,baseName,dirName);
 	//ParentNode=(struct NODE*)(malloc(sizeof(struct NODE*)));
 	//ParentNode->parentPtr=NULL;
         //ParentNode->childPtr=NULL;
@@ -109,45 +109,58 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
     //
     //
     //
-        int delimiterNum;
+        int delimiterNum=-1;
     for(int i=0; i<strlen(pathName); i++) {
     if(pathName[i]=='/') {
         delimiterNum=i;
     }
     }
+
+
+
     //for(int j; j<delimiterNum; j++){
         //*baseName=strtok(pathName, "/");
     //}
+    	if(delimiterNum==-1){
+	strcpy(baseName, pathName);
+	strcpy(dirName, "");
+	return cwd;
+	}
+	else{
+    	strcpy(baseName, pathName+delimiterNum+1);
+	}
         strncpy(dirName, pathName, delimiterNum);
 	dirName[delimiterNum]='\0';
-        strcpy(baseName, pathName+delimiterNum+1);
+        //strcpy(baseName, pathName+delimiterNum+1);
 
 
         struct NODE* directory;
 	//directory=(struct NODE*)(malloc(sizeof(struct NODE*)));
-	//directory->parentPtr=NULL;
-       	//directory->childPtr=NULL;
-        //directory->siblingPtr=NULL;
+	//printf(cwd->name);	
 
-
-        if (pathName[0]=='/'){
+        if (dirName[0]=='/'){
         directory=root;
 }
         else{
         directory=cwd;
+	
         }
         //currentNode = cwd; // if it's a relative path, or root if it's an absolute path
         //currentDirName = firstToken; // refer to the tokenization example at /u/pa/nb/tolgacan/210/spring25/strtokex.c
-        char* temp=malloc(200);
-	strcpy(temp, dirName);
-	char* token=strtok(temp, "/");
+        //char* temp=malloc(200);
+	//strcpy(temp, dirName);
+	char* token=strtok(dirName, "/");
+	//strcpy(token, dirName);
+	//printf(temp);
+	//printf(token);	
+
         while (token!=NULL) { // while there are still tokens
-                struct NODE* child;
+                struct NODE* child=directory->childPtr;
 		//child=(struct NODE*)(malloc(sizeof(struct NODE*)));
 		//child->parentPtr=NULL;
                 //child->childPtr=NULL;
                 //child->siblingPtr=NULL;
-		child = directory->childPtr;
+		//child = directory->childPtr;
 
                  while (child!=NULL) {
                         if (strcmp(child->name,token)!=0) {
@@ -173,7 +186,7 @@ struct NODE* splitPath(char* pathName, char* baseName, char* dirName){
         //outputPtr->childPtr=NULL;
         //outputPtr->siblingPtr=NULL;
 	//outputPtr=directory;
-	printf("Found Parent Directory");
+	//printf("Found Parent Directory\n");
         return directory;
 }
 
