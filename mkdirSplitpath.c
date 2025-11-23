@@ -63,13 +63,14 @@ void mkdir(char pathName[]){
         		}
 			child = child->siblingPtr;
 		}
-		child->siblingPtr = NewDir;
-
-
 		if (strcmp(child->name,baseName)==0) {
                      printf("MKDIR ERROR: directory %s already exists\n", pathName);
                                 return;
                 }
+
+		child->siblingPtr = NewDir;
+
+
 	}
 
 
