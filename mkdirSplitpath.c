@@ -21,7 +21,7 @@ void mkdir(char pathName[]){
 	//ParentNode->parentPtr=NULL;
         //ParentNode->childPtr=NULL;
         //ParentNode->siblingPtr=NULL;
-
+	if (ParentNode == NULL) return;
 
 
 	struct NODE* NewDir;
@@ -31,7 +31,8 @@ void mkdir(char pathName[]){
 
 //Need a for loop to loop through the children. Check the children if it already exists.
 
-	NewDir=(struct NODE*)(malloc(sizeof(struct NODE*)));
+	//NewDir=(struct NODE*)(malloc(sizeof(struct NODE*)));
+	NewDir=(struct NODE*)(malloc(sizeof(struct NODE)));
 	//ParentNode=(struct NODE*)(malloc(sizeof(struct NODE*)));
 	strcpy(NewDir->name, baseName);
 	NewDir->fileType='D';
@@ -56,12 +57,19 @@ void mkdir(char pathName[]){
 		while(child->siblingPtr!=NULL){
 			int res=strcmp(child->name,baseName);
                         if(res==0){
-                		printf("MKDIR ERROR: directory %s already exists\n", dirName);
+                		//printf("MKDIR ERROR: directory %s already exists\n", dirName);
+				printf("MKDIR ERROR: directory %s already exists\n", pathName);
                 		return;
         		}
 			child = child->siblingPtr;
 		}
 		child->siblingPtr = NewDir;
+
+
+		if (strcmp(child->name,baseName)==0) {
+                     printf("MKDIR ERROR: directory %s already exists\n", pathName);
+                                return;
+                }
 	}
 
 
